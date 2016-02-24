@@ -211,5 +211,8 @@ highlight LineNr term=underline cterm=bold ctermfg=DarkGray
 set winheight=999
 
 " Config for SplitJoin
-let g:splitjoin_ruby_curly_braces = 0
-let g:splitjoin_ruby_hanging_args = 0
+let g:splitjoin_ruby_hanging_args=0
+let g:splitjoin_ruby_curly_braces=0
+
+" Trying to fix gitcommit message word wrapping
+autocmd FileType gitcommit setlocal nowrap
