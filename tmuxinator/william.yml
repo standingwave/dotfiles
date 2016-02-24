@@ -28,21 +28,34 @@ windows:
       panes:
         - vim
         - gcom && gu && bmr
-  - vm:
-      layout: even-horizontal
+  - william:
+      layout: main-vertical
       panes:
-        - pauper_start:
+        - william_logs:
           - ssh vm
-          - cd /home/vagrant/devel
-          - source activate
-          - pauper start
-        - chef_client:
+          - ssh billing
+          - tailf /etc/sv/william/log/main/current
+        - william_worker_logs:
           - ssh vm
-          - ssh app-1
-          - sudo chef-client
-  - billing:
-      layout: even-horizontal
+          - ssh billing
+          - tailf /etc/sv/william-workers/log/main/current
+  - nsq:
+      layout: tiled
       panes:
-        - pauper_start:
+        - nsqd_logs:
           - ssh vm
-          - cd /home/vagrant/devel
+          - ssh billing
+          - tailf /etc/sv/nsqd/log/main/current
+        - nsqlookupd_logs:
+          - ssh vm
+          - ssh billing
+          - tailf /etc/sv/nsqlookupd/log/main/current
+        - nsq_stats:
+          - ssh vm
+          - ssh billing
+          - sleep 5
+          - echo "while true; do curl http://billing:1911/stats; sleep 1; done;"
+        - nsq_clear:
+          - ssh vm
+          - ssh billing
+          - curl -X POST http://billing:1911/topic/delete\?topic=minitest
