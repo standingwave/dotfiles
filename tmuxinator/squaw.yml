@@ -1,0 +1,67 @@
+# ~/.tmuxinator/dotcom.yml
+
+name: squaw
+root: /Users/apandit/dev
+
+
+# Optional tmux socket
+# socket_name: foo
+
+# Runs before everything. Use it to start daemons etc.
+# pre: sudo /etc/rc.d/mysqld start
+
+# Runs in each window and pane before window/pane specific commands. Useful for setting up interpreter versions.
+# pre_window: rbenv shell 2.0.0-p247
+
+# Pass command line options to tmux. Useful for specifying a different tmux.conf.
+# tmux_options: -f ~/.tmux.mac.conf
+
+# Change the command to call tmux.  This can be used by derivatives/wrappers like byobu.
+# tmux_command: byobu
+
+# Specifies (by name or index) which window will be selected on project startup. If not set, the first window is used.
+# startup_window: logs
+
+windows:
+  - code:
+      layout: 9f82,255x64,0,0{173x64,0,0,4,81x64,174,0,5}
+      panes:
+        - squaw_code:
+          - ssh vm
+          - cd /home/vagrant/devel/Squaw
+          - vim
+        - squaw_term:
+          - ssh vm
+          - cd /home/vagrant/devel/Squaw
+          - gcom && gu && bmr
+  - squaw:
+      layout: main-vertical
+      panes:
+        - squaw_logs:
+          - ssh vm
+          - ssh app-1
+          - tailf /etc/sv/squaw/log/main/current
+        - squaw_worker_logs:
+          - ssh vm
+          - ssh app-1
+          - tailf /etc/sv/squaw-workers/log/main/current
+  - nsq:
+      layout: tiled
+      panes:
+        - nsqd_logs:
+          - ssh vm
+          - ssh billing
+          - tailf /etc/sv/nsqd/log/main/current
+        - nsqlookupd_logs:
+          - ssh vm
+          - ssh billing
+          - tailf /etc/sv/nsqlookupd/log/main/current
+        - nsq_stats:
+          - ssh vm
+          - ssh billing
+          - sleep 5
+          - echo "while true; do curl http://billing:1911/stats; sleep 1; done;"
+        - nsq_clear:
+          - ssh vm
+          - ssh billing
+          - curl -X POST http://billing:1911/topic/delete\?topic=minitest
