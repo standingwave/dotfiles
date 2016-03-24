@@ -1,6 +1,6 @@
 # ~/.tmuxinator/dotcom.yml
 
-name: squaw
+name: ns
 root: /Users/apandit/dev
 
 
@@ -26,28 +26,39 @@ windows:
   - code:
       layout: 9f82,255x64,0,0{173x64,0,0,4,81x64,174,0,5}
       panes:
-        - squaw_code:
+        - ns_code:
           - ssh vm
-          - cd /home/vagrant/devel/Squaw
+          - cd /home/vagrant/devel/Northstar
           - vim
-        - squaw_term:
+        - ns_term:
           - ssh vm
-          - cd /home/vagrant/devel/Squaw
+          - cd /home/vagrant/devel/Northstar
           - gcom && gu && bmr
   - app-1:
       layout: tiled
       panes:
-        - squaw_logs:
+        - northstar_logs:
           - ssh vm
           - ssh app-1
-          - sq_app_log
-        - squaw_worker_logs:
+          - ns_app_log
+        - northstar_worker_logs:
           - ssh vm
           - ssh app-1
-          - sq_workers_log
-        - squaw_shell_1:
+          - ns_workers_log
+        - app-1:
           - ssh vm
           - ssh app-1
-        - squaw_shell_2:
+        - app-1-2:
           - ssh vm
-          - sq_listener_log
+          - ssh app-1
+  - vm:
+    layout: tiled
+    panes:
+      - vm-1:
+        - ssh vm
+        - cd devel
+        - aa
+      - vm-2:
+        - ssh vm
+        - cd devel
+        - aa
