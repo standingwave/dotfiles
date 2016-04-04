@@ -186,10 +186,10 @@ source $HOME/.vim/leader_keys.vim
 source $HOME/.vim/vim-airline.vim
 
 " Buffer navigation more naturally
-nnoremap <C-J> <C-W><C-J>
-nnoremap <C-K> <C-W><C-K>
-nnoremap <C-L> <C-W><C-L>
-nnoremap <C-H> <C-W><C-H>
+" nnoremap <C-J> <C-W><C-J>
+" nnoremap <C-K> <C-W><C-K>
+" nnoremap <C-L> <C-W><C-L>
+" nnoremap <C-H> <C-W><C-H>
 
 " Scroll while keeping 5 lines at the file borders
 set scrolloff=5
