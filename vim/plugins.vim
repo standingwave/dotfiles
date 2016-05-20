@@ -1,5 +1,3 @@
-" Plugins I am experimenting with:
-
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'benmills/vimux'
 Plug 'christoomey/vim-tmux-navigator'
@@ -24,3 +22,5 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-ruby/vim-ruby'
 Plug 'vim-scripts/ReplaceWithRegister'
 Plug 'vim-scripts/greplace.vim'
+Plug 'scrooloose/nerdtree'
+Plug 'kien/ctrlp.vim'
