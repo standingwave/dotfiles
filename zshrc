@@ -60,8 +60,11 @@ export dirstacksize=5
 # set localhost for postgres
 export PGHOST=localhost
 
+# prod RO password
+export CONTROL_PLANE_DB_PASSWORD=ow3jvHMzM2JaP
+
 # recommended by brew doctor
-export PATH='/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin:/opt/local/bin:/opt/local/sbin:/usr/texbin:~/bin'
+# export PATH='/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin:/opt/local/bin:/opt/local/sbin:/usr/texbin:~/bin'
 
 # Enable zmv, alias to 'mmv' to allow matching like `mmv *.mp3 *.old.mp3`
 autoload -U zmv
@@ -95,6 +98,7 @@ export PATH="$HOME/.bin:$PATH"
 
 # mkdir .git/safe in the root of repositories you trust
 export PATH=".git/safe/../../bin:$PATH"
+autoload -Uz compinit && compinit
 
 # Paths for Postgres.app binaries
 export PATH="/Applications/Postgres.app/Contents/Versions/9.4/bin:$PATH"
